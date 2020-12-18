@@ -1,0 +1,20 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <Authors>Bo Søborg Petersen</Authors>
+    <Description>This package consumes a '.buildinfo.json' file at the root of the target repo, to create an endpoint at '/info/version' with build information, and links</Description>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <PackageProjectUrl>https://github.com/BoSoeborgPetersen/BuildInfoEndpoint</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/BoSoeborgPetersen/BuildInfoEndpoint</RepositoryUrl>
+    <PackageTags>AspNetCore</PackageTags>
+  </PropertyGroup>
+  
+  <ItemGroup>
+    <FrameworkReference Include="Microsoft.AspNetCore.App" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
+  </ItemGroup>
+
+</Project>
