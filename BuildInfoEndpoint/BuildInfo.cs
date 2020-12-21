@@ -9,27 +9,32 @@ namespace BuildInfoEndpoint
 {
     public class BuildInfo
     {
-        public string GitHash { get; } = "000000";
-        public string ShortGitHash => GitHash.Count() >= 6 ? GitHash.Substring(0, 6) : "000000";
         public string Version { get; } = "000000";
+        public string GitHash { get; } = "000000";
         public string RepoUrl { get; } = "000000";
         public string PipelineUrl { get; } = "00000000.0";
 
-        public BuildInfo(IHostEnvironment hostEnvironment, string buildInfoFileName)
+        public string ShortGitHash => GitHash.Count() >= 6 ? GitHash.Substring(0, 6) : "000000";
+        public string RepoLink => $"<a href=\"{RepoUrl}\">{ShortGitHash}</a>";
+        public string PipelineLink => $"<a href=\"{PipelineUrl}\">{Version}</a>";
+        public string EndpointText => $"Powered by {RuntimeInformation.FrameworkDescription} and deployed from commit {RepoLink} via build {PipelineLink}";
+        public string ConsoleText => $"Powered by {RuntimeInformation.FrameworkDescription} and deployed from commit {ShortGitHash} with version {Version}";
+
+        public BuildInfo(string fileName)
         {
-            var buildFilePath = Path.Combine(hostEnvironment.ContentRootPath, buildInfoFileName);
+            var filePath = Path.Combine(Directory.GetCurrentDirectory(), fileName);
 
-            if (File.Exists(buildFilePath))
+            if (File.Exists(filePath))
             {
-                dynamic jToken = JToken.Parse(File.ReadAllText(buildFilePath));
+                dynamic jToken = JToken.Parse(File.ReadAllText(filePath));
 
-                GitHash = jToken.GitHash ?? GitHash;
                 Version = jToken.Version ?? Version;
-                RepoUrl = jToken.DevopsRepoUrl ?? RepoUrl;
-                PipelineUrl = jToken.DevopsPipelineUrl ?? PipelineUrl;
+                GitHash = jToken.GitHash ?? GitHash;
+                RepoUrl = jToken.RepoUrl ?? RepoUrl;
+                PipelineUrl = jToken.PipelineUrl ?? PipelineUrl;
             }
 
-            Console.WriteLine($"Powered by {RuntimeInformation.FrameworkDescription} and deployed from commit {ShortGitHash} with version {Version}");
+            Console.WriteLine(ConsoleText);
         }
     }
 }
