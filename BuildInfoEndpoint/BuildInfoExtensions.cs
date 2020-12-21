@@ -8,14 +8,14 @@ namespace BuildInfoEndpoint
 {
     public static class BuildInfoExtensions
     {
-        public static IEndpointConventionBuilder MapBuildInfoEndpoint(this IEndpointRouteBuilder endpoints, IHostEnvironment env, string path = "/info/version", string buildInfoFileName = ".buildinfo.json")
+        public static IEndpointConventionBuilder MapBuildInfoEndpoint(this IEndpointRouteBuilder endpoints, IHostEnvironment env, string url = "/build/info", string fileName = ".buildinfo.json")
         {
-            return endpoints.MapGet(path, async context =>
+            return endpoints.MapGet(url, async context =>
             {
-                var _info = new BuildInfo(env, buildInfoFileName);
+                var _info = new BuildInfo(env, fileName);
                 context.Response.ContentType = "text/HTML";
-                var repoLink = $"<a href=\"{_info.DevopsRepoUrl}\">{_info.ShortGitHash}</a>";
-                var pipelineLink = $"<a href=\"{_info.DevopsPipelineUrl}\">{_info.Version}</a>";
+                var repoLink = $"<a href=\"{_info.RepoUrl}\">{_info.ShortGitHash}</a>";
+                var pipelineLink = $"<a href=\"{_info.PipelineUrl}\">{_info.Version}</a>";
                 await context.Response.WriteAsync($"Powered by {RuntimeInformation.FrameworkDescription} and deployed from commit {repoLink} via build {pipelineLink}");
             });
         }

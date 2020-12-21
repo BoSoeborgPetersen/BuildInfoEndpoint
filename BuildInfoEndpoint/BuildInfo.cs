@@ -12,8 +12,8 @@ namespace BuildInfoEndpoint
         public string GitHash { get; } = "000000";
         public string ShortGitHash => GitHash.Count() >= 6 ? GitHash.Substring(0, 6) : "000000";
         public string Version { get; } = "000000";
-        public string DevopsRepoUrl { get; } = "000000";
-        public string DevopsPipelineUrl { get; } = "00000000.0";
+        public string RepoUrl { get; } = "000000";
+        public string PipelineUrl { get; } = "00000000.0";
 
         public BuildInfo(IHostEnvironment hostEnvironment, string buildInfoFileName)
         {
@@ -25,8 +25,8 @@ namespace BuildInfoEndpoint
 
                 GitHash = jToken.GitHash ?? GitHash;
                 Version = jToken.Version ?? Version;
-                DevopsRepoUrl = jToken.DevopsRepoUrl ?? DevopsRepoUrl;
-                DevopsPipelineUrl = jToken.DevopsPipelineUrl ?? DevopsPipelineUrl;
+                RepoUrl = jToken.DevopsRepoUrl ?? RepoUrl;
+                PipelineUrl = jToken.DevopsPipelineUrl ?? PipelineUrl;
             }
 
             Console.WriteLine($"Powered by {RuntimeInformation.FrameworkDescription} and deployed from commit {ShortGitHash} with version {Version}");

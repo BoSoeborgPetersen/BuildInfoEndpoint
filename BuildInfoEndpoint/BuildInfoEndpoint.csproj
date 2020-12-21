@@ -2,12 +2,12 @@
 
   <PropertyGroup>
     <Authors>Bo Søborg Petersen</Authors>
-    <Description>This package consumes a '.buildinfo.json' file at the root of the target repo, to create an endpoint at '/info/version' with build information, and links</Description>
+    <Description>This package consumes a '.buildinfo.json' file at the root, to create an endpoint at '/build/info' with build information, and links</Description>
     <TargetFramework>netcoreapp3.1</TargetFramework>
     <PackageProjectUrl>https://github.com/BoSoeborgPetersen/BuildInfoEndpoint</PackageProjectUrl>
     <RepositoryUrl>https://github.com/BoSoeborgPetersen/BuildInfoEndpoint</RepositoryUrl>
     <PackageTags>AspNetCore</PackageTags>
-    <PackageVersion>1.1.0</PackageVersion>
+    <PackageVersion>3.1.0</PackageVersion>
   </PropertyGroup>
   
   <ItemGroup>
