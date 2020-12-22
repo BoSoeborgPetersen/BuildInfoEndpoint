@@ -7,7 +7,7 @@
     <PackageProjectUrl>https://github.com/BoSoeborgPetersen/BuildInfoEndpoint</PackageProjectUrl>
     <RepositoryUrl>https://github.com/BoSoeborgPetersen/BuildInfoEndpoint</RepositoryUrl>
     <PackageTags>AspNetCore</PackageTags>
-    <PackageVersion>3.1.2</PackageVersion>
+    <PackageVersion>3.1.3</PackageVersion>
   </PropertyGroup>
   
   <ItemGroup>

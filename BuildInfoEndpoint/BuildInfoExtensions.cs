@@ -6,16 +6,16 @@ namespace BuildInfoEndpoint
 {
     public static class BuildInfoExtensions
     {
-        public static BuildInfo _info;
+        public static BuildInfo Data;
 
         public static RequestDelegate BuildInfoEndpoint(string fileName = ".buildinfo.json")
         {
-            _info = new BuildInfo(fileName);
+            Data = new BuildInfo(fileName);
 
             return async context =>
             {
                 context.Response.ContentType = "text/HTML";
-                await context.Response.WriteAsync(_info.EndpointText);
+                await context.Response.WriteAsync(Data.EndpointText);
             };
         }
 
