@@ -1,5 +1,4 @@
-﻿using Microsoft.Extensions.Hosting;
-using Newtonsoft.Json.Linq;
+﻿using Newtonsoft.Json.Linq;
 using System;
 using System.IO;
 using System.Linq;
@@ -9,14 +8,14 @@ namespace BuildInfoEndpoint
 {
     public class BuildInfo
     {
-        public string Version { get; } = "000000";
+        public string Version { get; } = "0.0.0";
         public string GitHash { get; } = "000000";
-        public string RepoUrl { get; } = "000000";
-        public string PipelineUrl { get; } = "00000000.0";
+        public string RepoUrl { get; }
+        public string PipelineUrl { get; }
 
-        public string ShortGitHash => GitHash.Count() >= 6 ? GitHash.Substring(0, 6) : "000000";
-        public string RepoLink => $"<a href=\"{RepoUrl}\">{ShortGitHash}</a>";
-        public string PipelineLink => $"<a href=\"{PipelineUrl}\">{Version}</a>";
+        public string ShortGitHash => GitHash.Count() >= 6 ? GitHash.Substring(0, 6) : GitHash;
+        public string RepoLink => IsValidUri(RepoUrl) ? $"<a href=\"{RepoUrl}\">{ShortGitHash}</a>" : ShortGitHash;
+        public string PipelineLink => IsValidUri(PipelineUrl) ? $"<a href=\"{PipelineUrl}\">{Version}</a>" : Version;
         public string EndpointText => $"Powered by {RuntimeInformation.FrameworkDescription} and deployed from commit {RepoLink} via build {PipelineLink}";
         public string ConsoleText => $"Powered by {RuntimeInformation.FrameworkDescription} and deployed from commit {ShortGitHash} with version {Version}";
 
@@ -30,11 +29,16 @@ namespace BuildInfoEndpoint
 
                 Version = jToken.Version ?? Version;
                 GitHash = jToken.GitHash ?? GitHash;
-                RepoUrl = jToken.RepoUrl ?? RepoUrl;
-                PipelineUrl = jToken.PipelineUrl ?? PipelineUrl;
+                RepoUrl = jToken.RepoUrl;
+                PipelineUrl = jToken.PipelineUrl;
             }
 
             Console.WriteLine(ConsoleText);
+        }
+
+        private bool IsValidUri(string uri)
+        {
+            return Uri.TryCreate(uri, UriKind.RelativeOrAbsolute, out _);
         }
     }
 }
