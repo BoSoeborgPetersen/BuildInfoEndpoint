@@ -3,19 +3,17 @@
   <PropertyGroup>
     <Authors>Bo Søborg Petersen</Authors>
     <Description>This package consumes a '.buildinfo.json' file at the root, to create an endpoint at '/build/info' with build information, and links</Description>
-    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <TargetFramework>net6.0</TargetFramework>
     <PackageProjectUrl>https://github.com/BoSoeborgPetersen/BuildInfoEndpoint</PackageProjectUrl>
     <RepositoryUrl>https://github.com/BoSoeborgPetersen/BuildInfoEndpoint</RepositoryUrl>
     <PackageTags>AspNetCore</PackageTags>
-    <PackageVersion>3.1.3</PackageVersion>
+    <PackageVersion>6.0.0</PackageVersion>
+    <Nullable>enable</Nullable>
+    <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
   </PropertyGroup>
-  
-  <ItemGroup>
-    <FrameworkReference Include="Microsoft.AspNetCore.App" />
-  </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
+    <FrameworkReference Include="Microsoft.AspNetCore.App" />
   </ItemGroup>
 
 </Project>
