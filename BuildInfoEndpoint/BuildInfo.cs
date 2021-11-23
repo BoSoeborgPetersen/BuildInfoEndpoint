@@ -5,7 +5,7 @@ using System.Runtime.InteropServices;
 
 namespace BuildInfoEndpoint
 {
-    public struct BuildInfo
+    public class BuildInfo
     {
         public string Version { get; init; } = "0.0.0";
         public string GitHash { get; init; } = "000000";
@@ -26,16 +26,16 @@ namespace BuildInfoEndpoint
         public static BuildInfo ReadFromFile(string fileName)
         {
             var filePath = Path.Combine(Directory.GetCurrentDirectory(), fileName);
+            BuildInfo? buildInfo = null;
 
             if (File.Exists(filePath))
             {
                 using var stream = File.OpenRead(filePath);
-                var buildInfo = JsonSerializer.Deserialize<BuildInfo>(stream);
-                Console.WriteLine(buildInfo.ConsoleText);
-                return buildInfo;
+                buildInfo = JsonSerializer.Deserialize<BuildInfo>(stream);
+                Console.WriteLine(buildInfo?.ConsoleText);
             }
 
-            return default;
+            return buildInfo ?? new();
         }
     }
 }

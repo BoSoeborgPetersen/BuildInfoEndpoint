@@ -6,7 +6,7 @@ namespace BuildInfoEndpoint
 {
     public static class BuildInfoExtensions
     {
-        private static BuildInfo Data;
+        private static BuildInfo? Data;
 
         public static RequestDelegate BuildInfoEndpoint(string fileName = ".buildinfo.json")
         {
