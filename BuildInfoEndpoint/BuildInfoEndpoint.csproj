@@ -13,6 +13,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+	  <InternalsVisibleTo Include="BuildInfoEndpoint.Tests"/>
     <FrameworkReference Include="Microsoft.AspNetCore.App" />
   </ItemGroup>
 
