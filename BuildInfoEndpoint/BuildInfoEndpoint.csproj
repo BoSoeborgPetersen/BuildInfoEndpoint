@@ -6,14 +6,12 @@
     <TargetFramework>net6.0</TargetFramework>
     <PackageProjectUrl>https://github.com/BoSoeborgPetersen/BuildInfoEndpoint</PackageProjectUrl>
     <RepositoryUrl>https://github.com/BoSoeborgPetersen/BuildInfoEndpoint</RepositoryUrl>
-    <PackageTags>AspNetCore</PackageTags>
-    <PackageVersion>6.0.1</PackageVersion>
+    <PackageTags>AspNet</PackageTags>
+    <PackageVersion>6.0.0</PackageVersion>
     <Nullable>enable</Nullable>
-    <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
   </PropertyGroup>
 
   <ItemGroup>
-	  <InternalsVisibleTo Include="BuildInfoEndpoint.Tests"/>
     <FrameworkReference Include="Microsoft.AspNetCore.App" />
   </ItemGroup>
 

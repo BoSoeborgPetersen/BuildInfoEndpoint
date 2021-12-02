@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.IO;
 using System.Text.Json;
 using System.Runtime.InteropServices;
@@ -38,7 +38,7 @@ public class BuildInfo
         return buildInfo ?? new();
     }
 
-    internal static BuildInfo? ReadFromStream(Stream stream)
+    public static BuildInfo? ReadFromStream(Stream stream)
     {
         return JsonSerializer.Deserialize<BuildInfo>(stream);
     }
