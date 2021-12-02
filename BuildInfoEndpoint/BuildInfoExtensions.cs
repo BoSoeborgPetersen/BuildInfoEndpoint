@@ -2,26 +2,25 @@
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Routing;
 
-namespace BuildInfoEndpoint
+namespace BuildInfoEndpoint;
+
+public static class BuildInfoExtensions
 {
-    public static class BuildInfoExtensions
+    private static BuildInfo? Data;
+
+    public static RequestDelegate BuildInfoEndpoint(string fileName = ".buildinfo.json")
     {
-        public static BuildInfo Data;
+        Data = BuildInfo.ReadFromFile(fileName);
 
-        public static RequestDelegate BuildInfoEndpoint(string fileName = ".buildinfo.json")
+        return async context =>
         {
-            Data = new BuildInfo(fileName);
+            context.Response.ContentType = "text/HTML";
+            await context.Response.WriteAsync(Data.EndpointText);
+        };
+    }
 
-            return async context =>
-            {
-                context.Response.ContentType = "text/HTML";
-                await context.Response.WriteAsync(Data.EndpointText);
-            };
-        }
-
-        public static IEndpointConventionBuilder MapBuildInfoEndpoint(this IEndpointRouteBuilder endpoints, string url, string fileName = ".buildinfo.json")
-        {
-            return endpoints.MapGet(url, BuildInfoEndpoint(fileName));
-        }
+    public static IEndpointConventionBuilder MapBuildInfoEndpoint(this IEndpointRouteBuilder endpoints, string url, string fileName = ".buildinfo.json")
+    {
+        return endpoints.MapGet(url, BuildInfoEndpoint(fileName));
     }
 }
